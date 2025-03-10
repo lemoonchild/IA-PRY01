@@ -32,13 +32,11 @@ class PerceptronModel(Module):
 
         where weight_vector is a pytorch Tensor of dimension 'dimensions'
 
-        
         Hint: You can use ones(dim) to create a tensor of dimension dim.
         """
         super(PerceptronModel, self).__init__()
         
-        "*** YOUR CODE HERE ***"
-        
+        self.w = Parameter(ones((1, dimensions)))
 
     def get_weights(self):
         """
@@ -56,8 +54,7 @@ class PerceptronModel(Module):
 
         The pytorch function `tensordot` may be helpful here.
         """
-        "*** YOUR CODE HERE ***"
-        
+        return tensordot(x, self.w, dims=1)
 
     def get_prediction(self, x):
         """
