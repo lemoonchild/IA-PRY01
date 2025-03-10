@@ -62,7 +62,8 @@ class PerceptronModel(Module):
 
         Returns: 1 or -1
         """
-        "*** YOUR CODE HERE ***"
+        score = self.run(x)
+        return 1 if score >= 0 else -1
 
     def train(self, dataset):
         """
