@@ -64,8 +64,6 @@ class PerceptronModel(Module):
         """
         "*** YOUR CODE HERE ***"
 
-
-
     def train(self, dataset):
         """
         Train the perceptron until convergence.
@@ -89,10 +87,14 @@ class RegressionModel(Module):
     """
     def __init__(self):
         # Initialize your model parameters here
-        "*** YOUR CODE HERE ***"
         super().__init__()
-
-
+        self.model = torch.nn.Sequential(
+            torch.nn.Linear(1, 32),
+            torch.nn.ReLU(),
+            torch.nn.Linear(32, 16),
+            torch.nn.ReLU(),
+            torch.nn.Linear(16, 1)
+        )
 
     def forward(self, x):
         """
@@ -103,9 +105,8 @@ class RegressionModel(Module):
         Returns:
             A node with shape (batch_size x 1) containing predicted y-values
         """
-        "*** YOUR CODE HERE ***"
+        return self.model(x)
 
-    
     def get_loss(self, x, y):
         """
         Computes the loss for a batch of examples.
@@ -118,8 +119,6 @@ class RegressionModel(Module):
         """
         "*** YOUR CODE HERE ***"
  
-        
-
     def train(self, dataset):
         """
         Trains the model.
