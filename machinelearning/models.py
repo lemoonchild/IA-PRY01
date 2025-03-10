@@ -1,6 +1,7 @@
 from torch import no_grad, stack
 from torch.utils.data import DataLoader
 from torch.nn import Module
+from torch.nn import functional as F
 
 
 """
@@ -108,7 +109,7 @@ class RegressionModel(Module):
         """
         return self.model(x)
 
-    def get_loss(self, x, y):
+    def get_loss(self, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
         """
         Computes the loss for a batch of examples.
 
@@ -118,7 +119,9 @@ class RegressionModel(Module):
                 to be used for training
         Returns: a tensor of size 1 containing the loss
         """
-        "*** YOUR CODE HERE ***"
+        y_pred = self.forward(x)
+        loss = F.mse_loss(y_pred, y)
+        return loss
  
     def train(self, dataset):
         """
