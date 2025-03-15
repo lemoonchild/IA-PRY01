@@ -156,11 +156,18 @@ class RegressionModel(Module):
             dataset: a PyTorch dataset object containing data to be trained on
             
         """
-        "*** YOUR CODE HERE ***"
+        dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+        optimizer = optim.Adam(self.parameters(), lr=0.01)
 
-            
+        for epoch in range(100):
+            for batch in dataloader:
+                x = batch['x'].float()
+                y = batch['label'].float()
 
-
+                optimizer.zero_grad()
+                loss = self.get_loss(x, y)
+                loss.backward()
+                optimizer.step()
 
 
 
