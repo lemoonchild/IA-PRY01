@@ -192,11 +192,10 @@ class DigitClassificationModel(Module):
         super().__init__()
         input_size = 28 * 28
         output_size = 10
-        "*** YOUR CODE HERE ***"
-
-
-
-
+    
+        self.weights = Parameter(torch.randn(input_size, output_size))
+        self.bias = Parameter(torch.randn(output_size))
+    
     def run(self, x):
         """
         Runs the model for a batch of examples.
@@ -211,9 +210,8 @@ class DigitClassificationModel(Module):
             A node with shape (batch_size x 10) containing predicted scores
                 (also called logits)
         """
-        """ YOUR CODE HERE """
-
- 
+        logits = x.matmul(self.weights) + self.bias
+        return logits
 
     def get_loss(self, x, y):
         """
@@ -230,15 +228,11 @@ class DigitClassificationModel(Module):
         """
         """ YOUR CODE HERE """
 
-    
-        
-
     def train(self, dataset):
         """
         Trains the model.
         """
         """ YOUR CODE HERE """
-
 
 
 class LanguageIDModel(Module):
