@@ -226,7 +226,10 @@ class DigitClassificationModel(Module):
             y: a node with shape (batch_size x 10)
         Returns: a loss tensor
         """
-        """ YOUR CODE HERE """
+        logits = self.run(x) 
+        labels = torch.argmax(y, dim=1)
+        loss = cross_entropy(logits, labels)
+        return loss
 
     def train(self, dataset):
         """
