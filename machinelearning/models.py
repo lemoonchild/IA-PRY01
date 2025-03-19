@@ -193,8 +193,10 @@ class DigitClassificationModel(Module):
         input_size = 28 * 28
         output_size = 10
     
-        self.weights = Parameter(torch.randn(input_size, output_size))
-        self.bias = Parameter(torch.randn(output_size))
+        hidden_size = 128
+        self.fc1 = Linear(input_size, hidden_size)
+        self.relu = relu
+        self.fc2 = Linear(hidden_size, output_size)
     
     def run(self, x):
         """
@@ -210,8 +212,9 @@ class DigitClassificationModel(Module):
             A node with shape (batch_size x 10) containing predicted scores
                 (also called logits)
         """
-        logits = x.matmul(self.weights) + self.bias
-        return logits
+        hidden = self.relu(self.fc1(x))
+        yhat = self.fc2(hidden)
+        return yhat
 
     def get_loss(self, x, y):
         """
