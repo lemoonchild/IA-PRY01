@@ -238,7 +238,20 @@ class DigitClassificationModel(Module):
         Trains the model.
         """
         """ YOUR CODE HERE """
-
+        dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+        optimizer = optim.Adam(self.parameters(), lr=0.001)
+        epochs = 10
+        for epoch in range(epochs):
+            for batch in dataloader:
+                x = batch['x']
+                label = batch['label']
+                loss = self.get_loss(x, label)
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+                accuracy = dataset.get_validation_accuracy()
+            if accuracy > 0.97:
+                break
 
 class LanguageIDModel(Module):
     """
